@@ -1,13 +1,14 @@
 package model;
 
 import java.util.Arrays;
+import model.Amount;
 
 public class Sale {
 	String client;
 	Product[] products;
-	double amount;
+	Amount amount;
 
-	public Sale(String client, Product[] products, double amount) {
+	public Sale(String client, Product[] products, Amount amount) {
 		super();
 		this.client = client;
 		this.products = products;
@@ -30,17 +31,17 @@ public class Sale {
 		this.products = products;
 	}
 
-	public double getAmount() {
-		return amount;
-	}
+        public Amount getAmount() {
+            return amount;
+        }
 
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
+        public void setAmount(Amount amount) {
+            this.amount = amount;
+        }
 
 	@Override
 	public String toString() {
-		return "Sale [client=" + client + ", products=" + Arrays.toString(products) + ", amount=" + amount + "]";
+		return "Sale [client=" + client.toUpperCase() + ", products=" + Arrays.toString(products) + ", amount=" + amount + "]";
 	}
 
 }

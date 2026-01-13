@@ -1,25 +1,35 @@
 package model;
 
+import model.Amount;
+
 public class Product {
 	private int id;
 	private String name;
-	private double publicPrice;
-	private double wholesalerPrice;
+	private Amount publicPrice;
+	private Amount wholesalerPrice;
 	private boolean available;
 	private int stock;
 	private static int totalProducts;
 
 	static double EXPIRATION_RATE = 0.60;
 
-	public Product(String name, double wholesalerPrice, boolean available, int stock) {
+	public Product(String name, Amount wholesalerPrice, Amount publicPrice, boolean available, int stock) {
 		super();
 		this.id = totalProducts + 1;
 		this.name = name;
 		this.wholesalerPrice = wholesalerPrice;
+		this.publicPrice = publicPrice;
 		this.available = available;
 		this.stock = stock;
 		totalProducts++;
 	}
+
+    @Override
+    public String toString() {
+        return "Product{" + "id=" + id + ", name=" + name + ", publicPrice=" + publicPrice + ", wholesalerPrice=" + wholesalerPrice + ", available=" + available + ", stock=" + stock + '}';
+    }
+
+    
 
 	public int getId() {
 		return id;
@@ -37,21 +47,21 @@ public class Product {
 		this.name = name;
 	}
 
-	public double getPublicPrice() {
-		return publicPrice;
-	}
+        public Amount getPublicPrice() {
+            return publicPrice;
+        }
 
-	public void setPublicPrice(double publicPrice) {
-		this.publicPrice = publicPrice;
-	}
+        public void setPublicPrice(Amount publicPrice) {
+            this.publicPrice = publicPrice;
+        }
 
-	public double getWholesalerPrice() {
-		return wholesalerPrice;
-	}
+        public Amount getWholesalerPrice() {
+            return wholesalerPrice;
+        }
 
-	public void setWholesalerPrice(double wholesalerPrice) {
-		this.wholesalerPrice = wholesalerPrice;
-	}
+        public void setWholesalerPrice(Amount wholesalerPrice) {
+            this.wholesalerPrice = wholesalerPrice;
+        }
 
 	public boolean isAvailable() {
 		return available;
@@ -78,7 +88,6 @@ public class Product {
 	}
 
 	public void expire() {
-		EXPIRATION_RATE = 0.2;
-		this.publicPrice = this.getPublicPrice() * EXPIRATION_RATE;
+		this.getPublicPrice().setValue(this.getPublicPrice().getValue() * EXPIRATION_RATE);
 	}
 }
