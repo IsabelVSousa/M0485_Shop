@@ -117,7 +117,7 @@ public class Shop {
         String name = scanner.nextLine();
         Product a = findProduct(name);
 
-        if (a != null) {
+        if (a == null) {
             System.out.print("Precio mayorista: ");
             double wholesalerPrice = scanner.nextDouble();
             System.out.print("Precio a la venta: ");
@@ -327,7 +327,7 @@ public class Shop {
      */
     public Product findProduct(String name) {
         for (int i = 0; i < inventory.length; i++) {
-            if (inventory[i] != null && inventory[i].getName().equals(name)) {
+            if (inventory[i] != null && inventory[i].getName().equalsIgnoreCase(name)) {
                 return inventory[i];
             }
         }
