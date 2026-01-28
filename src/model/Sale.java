@@ -1,47 +1,48 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import model.Amount;
 
 public class Sale {
-	String client;
-	Product[] products;
-	Amount amount;
 
-	public Sale(String client, Product[] products, Amount amount) {
-		super();
-		this.client = client;
-		this.products = products;
-		this.amount = amount;
-	}
+    String client;
+    ArrayList<Product> products;
+    Amount amount;
 
-	public String getClient() {
-		return client;
-	}
+    public Sale(String client, Amount amount) {
+        super();
+        this.client = client;
+        this.products = new ArrayList<>();
+        this.amount = amount;
+    }
 
-	public void setClient(String client) {
-		this.client = client;
-	}
+    public String getClient() {
+        return client;
+    }
 
-	public Product[] getProducts() {
-		return products;
-	}
+    public void setClient(String client) {
+        this.client = client;
+    }
 
-	public void setProducts(Product[] products) {
-		this.products = products;
-	}
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
 
-        public Amount getAmount() {
-            return amount;
-        }
+    public void setProducts(ArrayList<Product> products) {
+        this.products = products;
+    }
 
-        public void setAmount(Amount amount) {
-            this.amount = amount;
-        }
+    public Amount getAmount() {
+        return amount;
+    }
 
-	@Override
-	public String toString() {
-		return "Sale [client=" + client.toUpperCase() + ", products=" + Arrays.toString(products) + ", amount=" + amount + "]";
-	}
+    public void setAmount(Amount amount) {
+        this.amount = amount;
+    }
 
+    @Override
+    public String toString() {
+        return "Sale{" + "client=" + client + ", products=" + products + ", amount=" + amount + '}';
+    }
 }
