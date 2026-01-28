@@ -4,6 +4,9 @@
  */
 package model;
 
+import java.util.Objects;
+import java.util.Scanner;
+
 /**
  *
  * @author admin
@@ -20,8 +23,8 @@ class Employee extends Person{
 
     public Employee(int employeeId, String password, String name) {
         super(name);
-        this.employeeId = EMPLOYEEID;
-        this.password = PASSWORD;
+        this.employeeId = employeeId;
+        this.password = password;
     }
 
     /**
@@ -61,4 +64,51 @@ class Employee extends Person{
         this.employeeId = employeeId;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Employee other = (Employee) obj;
+        if (this.employeeId != other.employeeId) {
+            return false;
+        }
+        return Objects.equals(this.password, other.password);
+    }
+
+    
+    
+    public boolean login(int employeeId, String password){
+    //DO WHILE (e!= null && e!= login(employee.getID,password) )
+    Scanner sc = new Scanner (System.in);
+    boolean valid;
+        
+    do {
+        System.out.println("Introduzaca el nombre de empleado:");
+        String eName = sc.nextLine();
+        System.out.println("Introduzaca el Id de empleado:");
+        int eId = sc.nextInt();
+        System.out.println("Introduzaca el password de empleado:");
+        String ePassword = sc.nextLine();
+        
+        Employee e = new Employee(eId, ePassword,eName);
+    } while (e != null && !e.login());
+    
+        System.out.println("Empleado validado");
+        valid = true;
+        
+        return valid;
+    }
 }
