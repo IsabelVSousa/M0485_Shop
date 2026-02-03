@@ -5,18 +5,19 @@
 package model;
 
 import java.util.ArrayList;
+import main.Payable;
 
 /**
  *
  * @author Usuario
  */
-public class Client extends Person{
+public class Client extends Person implements Payable{
     
     private int memberId;
     
     private Amount balance;
     
-    private static final int MEMBER_ID = 456;
+    private static final int MEMBERID = 456;
     
     private static final Amount BALANCE = new Amount (50.00);
 
@@ -25,4 +26,16 @@ public class Client extends Person{
         this.memberId = memberId;
     }
 
+    @Override
+    public boolean pay() {
+        boolean valid = false;
+        
+        if (memberId == Client.MEMBERID && balance.equals(BALANCE)) {
+            valid = true;
+        }
+        
+        return valid;
+    }
+
+    
 }
