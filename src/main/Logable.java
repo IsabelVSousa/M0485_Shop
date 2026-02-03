@@ -11,4 +11,5 @@ package main;
 public interface Logable {
     public boolean login();
     
+    
 }
