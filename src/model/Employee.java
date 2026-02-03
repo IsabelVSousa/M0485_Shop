@@ -6,12 +6,13 @@ package model;
 
 import java.util.Objects;
 import java.util.Scanner;
+import main.Logable;
 
 /**
  *
  * @author admin
  */
-class Employee extends Person{
+public class Employee extends Person implements Logable{
     
     private int employeeId;
     
@@ -87,28 +88,15 @@ class Employee extends Person{
         }
         return Objects.equals(this.password, other.password);
     }
-
     
+    @Override
+    public boolean login() {
+        boolean valid = false;
     
-    public boolean login(int employeeId, String password){
-    //DO WHILE (e!= null && e!= login(employee.getID,password) )
-    Scanner sc = new Scanner (System.in);
-    boolean valid;
-        
-    do {
-        System.out.println("Introduzaca el nombre de empleado:");
-        String eName = sc.nextLine();
-        System.out.println("Introduzaca el Id de empleado:");
-        int eId = sc.nextInt();
-        System.out.println("Introduzaca el password de empleado:");
-        String ePassword = sc.nextLine();
-        
-        Employee e = new Employee(eId, ePassword,eName);
-    } while (e != null && !e.login());
-    
-        System.out.println("Empleado validado");
-        valid = true;
-        
+        if (employeeId == Employee.EMPLOYEEID && password.equals(Employee.PASSWORD)) {
+            valid = true;
+        }
+   
         return valid;
     }
 }
