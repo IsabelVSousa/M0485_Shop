@@ -111,16 +111,19 @@ public class Shop {
         eName = sc.nextLine();
         System.out.println("Introduzaca el Id de empleado:");
         eId = sc.nextInt();
+        sc.nextLine();
         System.out.println("Introduzaca el password de empleado:");
         String ePassword = sc.nextLine();
         
         e = new Employee(eId, ePassword,eName);
         
         
-        }while (e.login());
+        }while (!e.login());
         
         //aqui se llama al logable??
         e.login();
+        
+        System.out.println("Login correcto");
     }
 
     /**
