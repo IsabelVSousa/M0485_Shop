@@ -4,11 +4,13 @@
  */
 package main;
 
+import model.Amount;
+
 /**
  *
  * @author admin
  */
 public interface Payable {
-    public boolean pay();
+    public boolean pay(Amount amount);
     
 }
