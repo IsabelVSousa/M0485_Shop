@@ -6,6 +6,8 @@ package model;
 
 import java.util.ArrayList;
 import main.Payable;
+import model.Amount;
+
 
 /**
  *
@@ -27,11 +29,14 @@ public class Client extends Person implements Payable{
     }
 
     @Override
-    public boolean pay() {
+    public boolean pay(Amount amount) {
         boolean valid = false;
         
-        if (memberId == Client.MEMBERID && balance.equals(BALANCE)) {
-            valid = true;
+        if (BALANCE.getValue()>= amount.getValue()) {
+            BALANCE.setValue(BALANCE.getValue()-amount.getValue());
+            valid = true;        
+        } else {
+            BALANCE.setValue(BALANCE.getValue()-amount.getValue());
         }
         
         return valid;
