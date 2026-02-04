@@ -231,10 +231,8 @@ public class Shop {
         Scanner sc = new Scanner(System.in);
         System.out.println("Realizar venta, escribir nombre cliente");
         String cName = sc.nextLine();
-        System.out.println("Realizar venta, escribir id cliente");
-        int cId = sc.nextInt();
         
-        Client c1 = new Client(cId, cName);
+        Client c1 = new Client(cName);
        
         Product[] soldProducts = new Product[10];
         int cP = 0;
@@ -294,9 +292,9 @@ public class Shop {
         //can?dad a deber por parte del cliente
         c1.pay(a1);
         if (c1.pay(a1)) {
-            System.out.println("Su salde restante es de:");
+            System.out.println("Su salde restante es de:" + c1.getBalance());
         } else {
-            
+            System.out.println("Cliente debe:" + c1.getBalance());
         }
     }
 
