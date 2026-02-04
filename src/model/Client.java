@@ -21,11 +21,12 @@ public class Client extends Person implements Payable{
     
     private static final int MEMBERID = 456;
     
-    private static  Amount BALANCE = new Amount (50.00);
+    private static final Amount BALANCE = new Amount (50.00);
 
-    public Client(int memberId, String name) {
+    public Client(String name) {
         super(name);
-        this.memberId = memberId;
+        this.memberId = MEMBERID;
+        this.balance = BALANCE;
     }
 
     public int getMemberId() {
@@ -56,11 +57,11 @@ public class Client extends Person implements Payable{
     public boolean pay(Amount amount) {
         boolean valid = false;
         
-        if (BALANCE.getValue()>= amount.getValue()) {
-            balance.setValue(BALANCE.getValue()-amount.getValue());
+        if (balance.getValue()>= amount.getValue()) {
+            balance.setValue(balance.getValue()-amount.getValue());
             valid = true;        
         } else {
-            balance.setValue(BALANCE.getValue()-amount.getValue());
+            balance.setValue(balance.getValue()-amount.getValue());
         }
         
         return valid;
