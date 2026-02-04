@@ -234,6 +234,7 @@ public class Shop {
         System.out.println("Realizar venta, escribir id cliente");
         int cId = sc.nextInt();
         
+        Client c1 = new Client(cId, cName);
        
         Product[] soldProducts = new Product[10];
         int cP = 0;
@@ -286,7 +287,17 @@ public class Shop {
         cash.setValue(cash.getValue() + totalAmount);
         amount += totalAmount;
         System.out.println("Venta realizada con exito, total: " + totalAmount);
-        Sale lastSale = new Sale(new Client(cId, cName), new Amount(totalAmount));
+        Amount a1 = new Amount (totalAmount);
+        Sale lastSale = new Sale(c1, a1);
+        
+        //Si pay() es true con?nuar, si es false con?nuar y mostrar mensaje con la
+        //can?dad a deber por parte del cliente
+        c1.pay(a1);
+        if (c1.pay(a1)) {
+            System.out.println("Su salde restante es de:");
+        } else {
+            
+        }
     }
 
     /**
