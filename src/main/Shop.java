@@ -288,9 +288,7 @@ public class Shop {
         Amount a1 = new Amount (totalAmount);
         Sale lastSale = new Sale(c1, a1);
         
-        //Si pay() es true con?nuar, si es false con?nuar y mostrar mensaje con la
-        //can?dad a deber por parte del cliente
-        c1.pay(a1);
+        //se duplica la cantidad que se le resta
         if (c1.pay(a1)) {
             System.out.println("Su salde restante es de:" + c1.getBalance());
         } else {
