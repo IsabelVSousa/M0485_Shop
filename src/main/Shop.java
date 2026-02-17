@@ -234,15 +234,16 @@ public class Shop {
         
         Client c1 = new Client(cName);
        
-        Product[] soldProducts = new Product[10];
-        int cP = 0;
-
+        
+        ArrayList<Product> soldProducts = new ArrayList<>();
+        
         if (cName.equals("0")) {
             return;
         }
         // sale product until input name is not 0
         double totalAmount = 0.0;
         String name = "";
+        
         while (!name.equals("0")) {
             System.out.println("Introduce el nombre del producto, escribir 0 para terminar:");
             name = sc.nextLine();
@@ -262,10 +263,9 @@ public class Shop {
                     product.setAvailable(false);
                 }
                 //add products
-                soldProducts[cP] = product;
-                cP++;
+                
+                soldProducts.add(product);
                 System.out.println("Producto a\u00f1adido con éxito");
-
 //                como lo hice yo:
 //                for (int i = 0; i < soldProducts.length; i++) {
 //                    if (soldProducts[i] == null) {
@@ -287,6 +287,8 @@ public class Shop {
         System.out.println("Venta realizada con exito, total: " + totalAmount);
         Amount a1 = new Amount (totalAmount);
         Sale lastSale = new Sale(c1, a1);
+        sales.add(lastSale);
+        lastSale.setProducts(soldProducts);
         
         //se duplica la cantidad que se le resta
         if (c1.pay(a1)) {

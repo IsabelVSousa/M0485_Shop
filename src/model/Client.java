@@ -67,5 +67,10 @@ public class Client extends Person implements Payable{
         return valid;
     }
 
+    @Override
+    public String toString() {
+        return "Client{" + "memberId=" + memberId + ", balance=" + balance + '}';
+    }
+
     
 }
