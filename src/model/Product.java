@@ -26,6 +26,12 @@ public class Product {
         totalProducts++;
     }
 
+    public Product(String name, Amount wholesalerPrice, int stock) {
+        this.name = name;
+        this.wholesalerPrice = wholesalerPrice;
+        this.stock = stock;
+    }
+
     public Product(String name) {
         this.name = name;
     }
