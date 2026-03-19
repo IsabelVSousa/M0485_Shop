@@ -1,5 +1,6 @@
 package main;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import model.Product;
 import model.Employee;
@@ -7,6 +8,7 @@ import model.Sale;
 import model.Amount;
 import java.util.Scanner;
 import model.Client;
+import model.Files;
 
 public class Shop {
 
@@ -25,8 +27,8 @@ public class Shop {
 
     public static void main(String[] args) {
         Shop shop = new Shop();
-
-        shop.loadInventory();
+        
+        Files.FileReader(inventory);
 
         Scanner scanner = new Scanner(System.in);
         int opcion = 0;
@@ -100,29 +102,28 @@ public class Shop {
      * initialize employeee session
      */
     public static void initSession() {
-        Scanner sc = new Scanner (System.in);
+        Scanner sc = new Scanner(System.in);
         String eName;
         int eId;
         Employee e;
-        
-        do{
-        
-        System.out.println("Introduzaca el nombre de empleado:");
-        eName = sc.nextLine();
-        System.out.println("Introduzaca el Id de empleado:");
-        eId = sc.nextInt();
-        sc.nextLine();
-        System.out.println("Introduzaca el password de empleado:");
-        String ePassword = sc.nextLine();
-        
-        e = new Employee(eId, ePassword,eName);
-        
-        
-        }while (!e.login());
-        
+
+        do {
+
+            System.out.println("Introduzaca el nombre de empleado:");
+            eName = sc.nextLine();
+            System.out.println("Introduzaca el Id de empleado:");
+            eId = sc.nextInt();
+            sc.nextLine();
+            System.out.println("Introduzaca el password de empleado:");
+            String ePassword = sc.nextLine();
+
+            e = new Employee(eId, ePassword, eName);
+
+        } while (!e.login());
+
         //aqui se llama al logable??
         e.login();
-        
+
         System.out.println("Login correcto");
     }
 
@@ -130,10 +131,11 @@ public class Shop {
      * load initial inventory to shop
      */
     public void loadInventory() {
-        addProduct(new Product("Manzana", new Amount(10.00), new Amount(20.00), true, 10));
-        addProduct(new Product("Pera", new Amount(20.00), new Amount(40.00), true, 20));
-        addProduct(new Product("Hamburguesa", new Amount(30.00), new Amount(60.00), true, 30));
-        addProduct(new Product("Fresa", new Amount(5.00), new Amount(10.00), true, 20));
+//        addProduct(new Product("Manzana", new Amount(10.00), new Amount(20.00), true, 10));
+//        addProduct(new Product("Pera", new Amount(20.00), new Amount(40.00), true, 20));
+//        addProduct(new Product("Hamburguesa", new Amount(30.00), new Amount(60.00), true, 30));
+//        addProduct(new Product("Fresa", new Amount(5.00), new Amount(10.00), true, 20));
+//    Files.FileReader(inventory);
     }
 
     /**
@@ -216,9 +218,12 @@ public class Shop {
      */
     public void showInventory() {
         System.out.println("Contenido actual de la tienda:");
+        System.out.println();
+//        Files.FileReader(inventory);
+     
         for (Product product : inventory) {
             if (product != null) {
-                System.out.println(product);
+                System.out.println(product.getName()+" | "+product.getWholesalerPrice()+" | "+product.getStock());
             }
         }
     }
@@ -231,19 +236,18 @@ public class Shop {
         Scanner sc = new Scanner(System.in);
         System.out.println("Realizar venta, escribir nombre cliente");
         String cName = sc.nextLine();
-        
+
         Client c1 = new Client(cName);
-       
-        
+
         ArrayList<Product> soldProducts = new ArrayList<>();
-        
+
         if (cName.equals("0")) {
             return;
         }
         // sale product until input name is not 0
         double totalAmount = 0.0;
         String name = "";
-        
+
         while (!name.equals("0")) {
             System.out.println("Introduce el nombre del producto, escribir 0 para terminar:");
             name = sc.nextLine();
@@ -263,7 +267,7 @@ public class Shop {
                     product.setAvailable(false);
                 }
                 //add products
-                
+
                 soldProducts.add(product);
                 System.out.println("Producto a\u00f1adido con éxito");
 //                como lo hice yo:
@@ -285,11 +289,11 @@ public class Shop {
         cash.setValue(cash.getValue() + totalAmount);
         amount += totalAmount;
         System.out.println("Venta realizada con exito, total: " + totalAmount);
-        Amount a1 = new Amount (totalAmount);
+        Amount a1 = new Amount(totalAmount);
         Sale lastSale = new Sale(c1, a1);
         sales.add(lastSale);
         lastSale.setProducts(soldProducts);
-        
+
         //se duplica la cantidad que se le resta
         if (c1.pay(a1)) {
             System.out.println("Su salde restante es de:" + c1.getBalance());
@@ -303,6 +307,7 @@ public class Shop {
      */
     private void showSales() {
         //preguntarle a dios una mejor manera de hacerlo?
+        Scanner sc = new Scanner(System.in);
         boolean empty = true;
         System.out.println("Lista de ventas:");
         for (Sale sale : sales) {
@@ -311,7 +316,17 @@ public class Shop {
                 empty = false;
             }
         } //sale todos los null
+        
+        System.out.println("Quiere exportar las ventas?:");
+        
+        String answer = sc.nextLine();
+        
+        if (answer.equalsIgnoreCase("si")) {
+                
+                Files.writeSales(sales);
 
+        }
+        
         if (empty) {
             System.out.println("La lista de ventas esta vacia");
         }
@@ -373,11 +388,18 @@ public class Shop {
      * @return product found by name
      */
     public Product findProduct(String name) {
+        //cambiar a equals
         if (inventory.contains(new Product(name))) {
             return inventory.get(inventory.indexOf(new Product(name)));
         } else {
             return null;
         }
+//        for (Product producto : inventory) {
+//            if (producto.getName().equalsIgnoreCase(name)) {
+//                return producto;
+//            }
+//        }
+//        return null;
     }
 
 }
