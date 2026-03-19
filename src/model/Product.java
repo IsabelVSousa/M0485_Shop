@@ -44,7 +44,7 @@ public class Product {
 //    }
 //    
     public String toString() {
-        return this.name + " " + this.publicPrice + " euro" ;
+        return this.name + " " + this.publicPrice;
     }
 
     public int getId() {
