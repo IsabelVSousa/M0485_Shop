@@ -141,7 +141,7 @@ public class Shop {
     /**
      * show current total cash
      */
-    private void showCash() {
+    public void showCash() {
         System.out.println("Dinero actual: " + cash.getValue());
     }
 
@@ -400,6 +400,10 @@ public class Shop {
 //            }
 //        }
 //        return null;
+    }
+
+    public Amount getCash() {
+        return cash;
     }
 
 }
