@@ -23,12 +23,14 @@ public class Shop {
     public Shop() {
         inventory = new ArrayList<Product>();
         sales = new ArrayList<Sale>();
+        //prueba de file inventario
+        Files.FileReader(inventory);
     }
 
     public static void main(String[] args) {
         Shop shop = new Shop();
-        
-        Files.FileReader(inventory);
+
+//        Files.FileReader(inventory);
 
         Scanner scanner = new Scanner(System.in);
         int opcion = 0;
@@ -64,7 +66,7 @@ public class Shop {
                     break;
 
                 case 3:
-                    shop.addStock();
+//                    shop.addStock();
                     break;
 
                 case 4:
@@ -88,7 +90,7 @@ public class Shop {
                     break;
 
                 case 9:
-                    shop.deleteProduct();
+//                    shop.deleteProduct();
                     break;
 
                 case 10:
@@ -177,23 +179,23 @@ public class Shop {
     /**
      * add stock for a specific product
      */
-    public void addStock() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Seleccione un nombre de producto: ");
-        String name = scanner.next();
+    public void addStock(String name, int stock) {
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.print("Seleccione un nombre de producto: ");
+//        String name = scanner.next();
         Product product = findProduct(name);
 
-        if (product != null) {
-            // ask for stock
-            System.out.print("Seleccione la cantidad a a\u00f1adir: ");
-            int stock = scanner.nextInt();
-            // update stock product
-            product.setStock(product.getStock() + stock);
-            System.out.println("El stock del producto " + name + " ha sido actualizado a " + product.getStock());
+//        if (product != null) {
+        // ask for stock
+//            System.out.print("Seleccione la cantidad a a\u00f1adir: ");
+//            int stock = scanner.nextInt();
+        // update stock product
+        product.setStock(product.getStock() + stock);
+//            System.out.println("El stock del producto " + name + " ha sido actualizado a " + product.getStock());
 
-        } else {
-            System.out.println("No se ha encontrado el producto con nombre " + name);
-        }
+//        } else {
+//            System.out.println("No se ha encontrado el producto con nombre " + name);
+//        }
     }
 
     /**
@@ -220,10 +222,10 @@ public class Shop {
         System.out.println("Contenido actual de la tienda:");
         System.out.println();
 //        Files.FileReader(inventory);
-     
+
         for (Product product : inventory) {
             if (product != null) {
-                System.out.println(product.getName()+" | "+product.getWholesalerPrice()+" | "+product.getStock());
+                System.out.println(product.getName() + " | " + product.getWholesalerPrice() + " | " + product.getStock());
             }
         }
     }
@@ -316,17 +318,17 @@ public class Shop {
                 empty = false;
             }
         } //sale todos los null
-        
+
         System.out.println("Quiere exportar las ventas?:");
-        
+
         String answer = sc.nextLine();
-        
+
         if (answer.equalsIgnoreCase("si")) {
-                
-                Files.writeSales(sales);
+
+            Files.writeSales(sales);
 
         }
-        
+
         if (empty) {
             System.out.println("La lista de ventas esta vacia");
         }
@@ -366,19 +368,19 @@ public class Shop {
     /**
      * delete products
      */
-    public void deleteProduct() {
+    public void deleteProduct(String name) {
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Introduzca nombre de producto: ");
-        String name = scanner.next();
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.print("Introduzca nombre de producto: ");
+//        String name = scanner.next();
         Product product = findProduct(name);
 
-        if (product != null) {
-            inventory.remove(product);
-            System.out.println("Producto eliminado con exito");
-        } else {
-            System.out.println("No se ha encontrado producto");
-        }
+//        if (product != null) {
+        inventory.remove(product);
+//            System.out.println("Producto eliminado con exito");
+//        } else {
+//            System.out.println("No se ha encontrado producto");
+//        }
     }
 
     /**
@@ -389,21 +391,24 @@ public class Shop {
      */
     public Product findProduct(String name) {
         //cambiar a equals
-        if (inventory.contains(new Product(name))) {
-            return inventory.get(inventory.indexOf(new Product(name)));
-        } else {
-            return null;
-        }
-//        for (Product producto : inventory) {
-//            if (producto.getName().equalsIgnoreCase(name)) {
-//                return producto;
-//            }
+//        if (inventory.contains(new Product(name))) {
+//            return inventory.get(inventory.indexOf(new Product(name)));
+//        } else {
+//            return null;
 //        }
-//        return null;
+        for (Product producto : inventory) {
+            if (producto.getName().equalsIgnoreCase(name)) {
+                return producto;
+            }
+        }
+        return null;
     }
 
     public Amount getCash() {
         return cash;
     }
 
+    public static ArrayList<Product> getInventory() {
+        return inventory;
+    }
 }
