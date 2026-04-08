@@ -5,12 +5,14 @@
 package view;
 
 import main.Shop;
+import model.Files;
 
 /**
  *
  * @author admin
  */
 public class ShopView extends javax.swing.JFrame {
+
     Shop shop;
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ShopView.class.getName());
@@ -32,13 +34,18 @@ public class ShopView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cash_up = new javax.swing.JButton();
-        add_stock = new javax.swing.JButton();
-        delete_product = new javax.swing.JButton();
-        add_product = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        add_stock = new javax.swing.JButton();
+        cash_up = new javax.swing.JButton();
+        add_product = new javax.swing.JButton();
+        delete_product = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Seleccione o pulse una opcion:");
+
+        add_stock.setText("AÑADIR STOCK");
+        add_stock.addActionListener(this::add_stockActionPerformed);
 
         cash_up.setText("CONTAR CAJA");
         cash_up.addActionListener(this::cash_upActionPerformed);
@@ -48,41 +55,36 @@ public class ShopView extends javax.swing.JFrame {
             }
         });
 
-        add_stock.setText("AÑADIR STOCK");
-        add_stock.addActionListener(this::add_stockActionPerformed);
-
-        delete_product.setText("ELIMINAR PRODUCTO");
-        delete_product.addActionListener(this::delete_productActionPerformed);
-
         add_product.setText("AÑADIR PRODUCTO");
         add_product.addActionListener(this::add_productActionPerformed);
 
-        jLabel1.setText("Seleccione o pulse una opcion:");
+        delete_product.setText("ELIMINAR PRODUCTO");
+        delete_product.addActionListener(this::delete_productActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(116, 116, 116)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(delete_product, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cash_up, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(add_stock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(add_product, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel1)))
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addGap(48, 48, 48)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(136, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(delete_product, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(cash_up, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(add_product, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(add_stock, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(137, 137, 137))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(45, 45, 45)
                 .addComponent(jLabel1)
-                .addGap(29, 29, 29)
+                .addGap(35, 35, 35)
                 .addComponent(cash_up)
                 .addGap(18, 18, 18)
                 .addComponent(add_product)
@@ -90,11 +92,43 @@ public class ShopView extends javax.swing.JFrame {
                 .addComponent(add_stock)
                 .addGap(18, 18, 18)
                 .addComponent(delete_product)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void delete_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_productActionPerformed
+        // TODO add your handling code here:
+        //        ProductView productView = new ProductView(this, true, shop);
+        //        productView.setLocationRelativeTo(this);
+        //        productView.setVisible(true);
+        int add = 9;
+        openProductView(add);
+    }//GEN-LAST:event_delete_productActionPerformed
+
+    private void add_stockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_stockActionPerformed
+        // TODO add your handling code here:
+        //        ProductView productView = new ProductView(this, true, shop);
+        //        productView.setLocationRelativeTo(this);
+        //        productView.setVisible(true);
+        int add = 3;
+        openProductView(add);
+
+    }//GEN-LAST:event_add_stockActionPerformed
+
+    private void add_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_productActionPerformed
+        // TODO add your handling code here:
+        //        ProductView productView = new ProductView(this, true, shop);
+        //        productView.setLocationRelativeTo(this);
+        //        productView.setVisible(true);
+        int add = 2;
+        openProductView(add);
+    }//GEN-LAST:event_add_productActionPerformed
+
+    private void cash_upKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cash_upKeyPressed
+
+    }//GEN-LAST:event_cash_upKeyPressed
 
     private void cash_upActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cash_upActionPerformed
         // TODO add your handling code here:
@@ -103,50 +137,12 @@ public class ShopView extends javax.swing.JFrame {
         cashView.setVisible(true);
     }//GEN-LAST:event_cash_upActionPerformed
 
-    private void add_stockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_stockActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_add_stockActionPerformed
-
-    private void delete_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_productActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_delete_productActionPerformed
-
-    private void add_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_productActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_add_productActionPerformed
-
-    private void cash_upKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cash_upKeyPressed
-        if (evt.getKeyChar() == '1') {
-            CashView cashView = new CashView(this, true, shop);
-            cashView.setLocationRelativeTo(this);
-            cashView.setVisible(true);
-        }
-    }//GEN-LAST:event_cash_upKeyPressed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ShopView().setVisible(true));
+    private void openProductView(int opc) {
+        ProductView productView = new ProductView(this, true, shop, opc);
+        productView.setLocationRelativeTo(this);
+        productView.setVisible(true);
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add_product;
