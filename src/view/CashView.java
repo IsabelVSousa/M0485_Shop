@@ -22,9 +22,9 @@ public class CashView extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         System.out.println(shop.getCash());
-        shop_cash.setText(shop.getCash().getValue() + " ? ");
+        shop_cash.setText(shop.getCash().getValue() + " euros ");
         shop_cash.setEditable(false);
-      
+        
     }
 
     /**
