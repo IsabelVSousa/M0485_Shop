@@ -6,6 +6,7 @@ package view;
 
 import javax.swing.JOptionPane;
 import model.Employee;
+import Exception.LimitLoginException;
 
 /**
  *
@@ -14,6 +15,8 @@ import model.Employee;
 public class LoginView extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(LoginView.class.getName());
+
+    private int attempt = 0;
 
     /**
      * Creates new form Start
@@ -123,24 +126,40 @@ public class LoginView extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         //eName = sc.nextLine
-        String eName = name.getText();
-        int eId = (int) id.getValue();
-        String ePassword = new String(password.getPassword());
+        try {
+            String eName = name.getText();
+            int eId = (int) id.getValue();
+            String ePassword = new String(password.getPassword());
 
-        Employee e;
+            Employee e;
 
-        e = new Employee(eId, ePassword, eName);
+            e = new Employee(eId, ePassword, eName);
 
-        if (e.login()) {
-            // shiw panel ok
-            JOptionPane.showMessageDialog(this, "Login correcto", "Bienvenido a la Tienda", JOptionPane.INFORMATION_MESSAGE);
-            //saltar la shpview
-            ShopView shopView = new ShopView();
-            shopView.setLocationRelativeTo(this);
-            shopView.setVisible(true);
-        } else {
-            //show panel ko
-            JOptionPane.showMessageDialog(this, "Login incorrecto", "Credenciales de empleado INCORRECTOS", JOptionPane.ERROR_MESSAGE);
+            if (e.login()) {
+                // shiw panel ok
+                JOptionPane.showMessageDialog(this, "Login correcto", "Bienvenido a la Tienda", JOptionPane.INFORMATION_MESSAGE);
+                //saltar la shpview
+                ShopView shopView = new ShopView();
+                shopView.setLocationRelativeTo(this);
+                shopView.setVisible(true);
+            } else {
+                //show panel ko
+                attempt++;
+                JOptionPane.showMessageDialog(this, "Login incorrecto", "Credenciales de empleado INCORRECTOS", JOptionPane.ERROR_MESSAGE);
+                name.setText("");
+                id.setValue(0);
+                password.setText(null);
+
+                if (attempt >= 3) {
+                    throw new LimitLoginException("Error: Número máximo de intentos alcanzados");
+                }
+            }
+
+        } catch (LimitLoginException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+            System.exit(0);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error en los datos");
         }
 
 
